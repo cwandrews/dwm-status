@@ -37,9 +37,13 @@ func BatteryStats() string {
 	stuffICareAbout := strings.SplitN(string(ret), ":", 2)[1]
 	acpiSlice := strings.Split(stuffICareAbout, ", ")
 	status := acpiSlice[0]
-	perc := acpiSlice[1]
-	remaining := strings.Split(acpiSlice[2], " ")[0]
-	return fmt.Sprintf("%s, %s, %s", status, perc, remaining)
+	if status == " Full" {
+		return "FULLY CHARGED"
+	} else {
+		perc := acpiSlice[1]
+		remaining := strings.Split(acpiSlice[2], " ")[0]
+		return fmt.Sprintf("%s, %s, %s", status, perc, remaining)
+	}
 
 }
 
